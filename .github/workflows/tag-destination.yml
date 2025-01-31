@@ -1,0 +1,20 @@
+name: Receive Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag Name"
+        required: true
+
+jobs:
+  process-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository B
+        uses: actions/checkout@v2
+
+      - name: Print received tag
+        run: |
+          echo "Tag recebida: ${{ github.event.inputs.tag }}"
