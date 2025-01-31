@@ -17,4 +17,4 @@ jobs:
 
       - name: Print received tag
         run: |
-          echo "Tag recebida: ${{ github.event.inputs.tag }}"
+          echo "Received Tag: ${{ github.event.inputs.tag }}"
