@@ -1,5 +1,9 @@
 name: Receive Tag
 
+permissions:
+  contents: write
+  actions: write
+
 on:
   workflow_dispatch:
     inputs:
@@ -29,5 +33,8 @@ jobs:
               event_type: 'trigger-sendgrid',
               client_payload: {
                 tag: '${{ github.event.inputs.tag }}'
+              },
+              headers: {
+                'Authorization': 'Bearer ${{ secrets.PERSONAL_ACCESS_TOKEN }}'
               }
             })
