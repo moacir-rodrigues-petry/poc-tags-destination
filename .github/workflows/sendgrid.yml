@@ -27,10 +27,10 @@ jobs:
           -d '{
                 "personalizations": [
                   {
-                    "to": [{"email": "recipient@example.com"}],
+                    "to": [{"email": "m.petry9@gmail.com"}],
                     "subject": "Test Email from GitHub Actions - Tag: '"$TAG_NAME"'"
                   }
                 ],
-                "from": {"email": "sender@example.com"},
+                "from": {"email": "moacir.rodrigues@moduscreate.com"},
                 "content": [{"type": "text/plain", "value": "Hello, this is an email sent from GitHub Actions with tag: '"$TAG_NAME"'!"}]
               }'
