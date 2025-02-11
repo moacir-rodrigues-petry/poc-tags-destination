@@ -1,5 +1,9 @@
 name: Send Email via SendGrid
 
+permissions:
+  contents: write
+  actions: write
+
 on:
   repository_dispatch:
     types:
