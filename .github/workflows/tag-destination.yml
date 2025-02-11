@@ -18,3 +18,16 @@ jobs:
       - name: Print received tag
         run: |
           echo "Received Tag: ${{ github.event.inputs.tag }}"
+
+      - name: Trigger SendGrid Workflow
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event_type: 'trigger-sendgrid',
+              client_payload: {
+                tag: '${{ github.event.inputs.tag }}'
+              }
+            })

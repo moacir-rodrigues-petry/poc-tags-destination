@@ -1,0 +1,32 @@
+name: Send Email via SendGrid
+
+on:
+  repository_dispatch:
+    types:
+      - trigger-sendgrid
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Send email via SendGrid
+        env:
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        run: |
+          TAG_NAME=${{ github.event.client_payload.tag }}
+          curl -X POST "https://api.sendgrid.com/v3/mail/send" \
+          -H "Authorization: Bearer $SENDGRID_API_KEY" \
+          -H "Content-Type: application/json" \
+          -d '{
+                "personalizations": [
+                  {
+                    "to": [{"email": "recipient@example.com"}],
+                    "subject": "Test Email from GitHub Actions - Tag: '"$TAG_NAME"'"
+                  }
+                ],
+                "from": {"email": "sender@example.com"},
+                "content": [{"type": "text/plain", "value": "Hello, this is an email sent from GitHub Actions with tag: '"$TAG_NAME"'!"}]
+              }'
